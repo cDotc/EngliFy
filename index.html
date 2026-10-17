@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EngliFy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --b:#1F51FF;
+  --b-light:#6d8dff;
+  --b-pale:#dfe6ff;
+  --ink:#0b1a55;
+  --sub:#4b5563;
+  --ok:#0f9d6a;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:#f7f9ff;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:18px 12px;overflow-x:hidden;position:relative;
+}
+.bg{position:fixed;border-radius:50%;filter:blur(70px);z-index:0;pointer-events:none}
+.bg.a{width:340px;height:340px;background:#cdd9ff;top:-110px;left:-90px;opacity:.9;animation:drift 12s ease-in-out infinite}
+.bg.b{width:360px;height:360px;background:#d3ecff;bottom:-130px;right:-110px;opacity:.85;animation:drift 14s ease-in-out infinite reverse}
+.bg.c{width:240px;height:240px;background:#e0d9ff;bottom:60px;left:-100px;opacity:.6;animation:drift 16s ease-in-out infinite}
+@keyframes drift{50%{transform:translate(26px,34px) scale(1.08)}}
+
+.card{
+  position:relative;z-index:1;width:100%;max-width:400px;
+  background:rgba(255,255,255,.93);
+  border:1px solid rgba(31,81,255,.18);
+  border-radius:34px;padding:30px 20px 22px;text-align:center;
+  box-shadow:0 18px 50px rgba(31,81,255,.10),0 0 40px rgba(31,81,255,.12);
+  animation:cardIn .9s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(34px) scale(.96)}}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:99px;
+  border:2px dashed rgba(31,81,255,.55);background:rgba(31,81,255,.06);
+  color:var(--ink);font-weight:800;font-size:12.5px;letter-spacing:.6px;text-transform:uppercase;
+  animation:fadeUp .7s .2s both;
+}
+.badge .rk{display:inline-block;font-size:16px;animation:rocket 2.4s ease-in-out infinite}
+@keyframes rocket{50%{transform:translate(2px,-3px) rotate(-4deg)}}
+
+/* ---------- logo entrance ---------- */
+.logo-box{position:relative;width:112px;height:112px;margin:26px auto 0}
+.glow{
+  position:absolute;inset:-8px;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,81,255,.55),rgba(31,81,255,0) 70%);
+  filter:blur(8px);opacity:0;
+  animation:glowIn .8s 1.1s ease-out forwards,glow 2.8s 1.9s ease-in-out infinite;
+}
+@keyframes glowIn{to{opacity:1}}
+@keyframes glow{50%{transform:scale(1.16);opacity:.6}}
+.ring{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);transform:rotate(-90deg);overflow:visible}
+.ring circle{fill:none;stroke:var(--b);stroke-width:4;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;
+  animation:draw 1.2s .35s cubic-bezier(.6,.1,.2,1) forwards,ringFade .6s 1.6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes ringFade{to{opacity:0}}
+.burst{position:absolute;inset:0;border-radius:50%;border:3px solid var(--b);opacity:0;animation:burst .9s 1.15s ease-out forwards}
+@keyframes burst{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
+.logo{
+  position:relative;width:100%;height:100%;border-radius:50%;background:#fff;object-fit:cover;display:block;
+  box-shadow:0 8px 24px rgba(31,81,255,.25),inset 0 0 0 1px rgba(31,81,255,.12);
+  opacity:0;
+  animation:logoIn 1s .8s cubic-bezier(.3,1.5,.5,1) forwards,bob 3.6s 2.2s ease-in-out infinite;
+}
+@keyframes logoIn{from{opacity:0;transform:scale(0) rotate(-200deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.tick{
+  position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;
+  background:var(--ok);border:3px solid #fff;display:grid;place-items:center;
+  box-shadow:0 4px 12px rgba(15,157,106,.4);
+  transform:scale(0);animation:tickIn .6s 1.7s cubic-bezier(.3,1.8,.5,1) forwards;
+}
+.tick svg{width:15px;height:15px}
+@keyframes tickIn{to{transform:scale(1)}}
+
+h1{
+  margin-top:20px;font-size:34px;font-weight:800;letter-spacing:-.5px;
+  background:linear-gradient(90deg,#1F51FF,#6d8dff,#1F51FF);background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:fadeUp .7s 1.5s both,shimmerText 5s 2.4s linear infinite;
+}
+@keyframes shimmerText{to{background-position:200% center}}
+.sub{margin-top:8px;font-size:15px;font-weight:500;color:var(--sub);animation:fadeUp .7s 1.65s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}}
+
+/* ---------- button ---------- */
+.btn{
+  position:relative;display:block;width:100%;margin-top:26px;padding:0 16px;height:56px;
+  border-radius:18px;cursor:pointer;overflow:hidden;
+  font-family:inherit;font-weight:700;font-size:16px;color:#fff;
+  border:0;background:linear-gradient(135deg,#4a74ff,#1F51FF);
+  box-shadow:0 8px 22px rgba(31,81,255,.45);
+  transition:transform .15s ease,background .35s ease,box-shadow .3s ease;
+  animation:fadeUp .7s 1.8s both,pulse 2.4s 2.8s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 8px 22px rgba(31,81,255,.45),0 0 0 0 rgba(31,81,255,.4)}
+  50%{box-shadow:0 10px 34px rgba(31,81,255,.8),0 0 0 8px rgba(31,81,255,0)}
+}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);animation:shine 3.2s 3.2s infinite}
+@keyframes shine{to{left:140%}}
+.btn:active{transform:scale(.97)}
+.btn .fill{position:absolute;left:0;top:0;height:100%;width:0;background:rgba(255,255,255,.28);z-index:1;transition:width .12s linear}
+.btn .t{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none;z-index:1}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.btn.loading{animation:none;pointer-events:none;box-shadow:0 8px 22px rgba(31,81,255,.45)}
+.btn.loading::after,.btn.done::after{display:none}
+.btn.done{animation:popBtn .55s cubic-bezier(.3,1.7,.5,1);pointer-events:none;
+  background:linear-gradient(135deg,#22c55e,#0f9d6a);box-shadow:0 10px 28px rgba(15,157,106,.5)}
+@keyframes popBtn{0%{transform:scale(.9)}60%{transform:scale(1.07)}100%{transform:scale(1)}}
+
+/* ---------- checklist ---------- */
+.steps{max-height:0;overflow:hidden;opacity:0;text-align:left;transition:max-height .5s ease,opacity .4s ease,margin .4s ease}
+.steps.show{max-height:230px;opacity:1;margin-top:18px}
+.step{display:flex;align-items:center;gap:12px;padding:7px 4px;font-size:14px;font-weight:600;color:#9aa4c7;transition:color .3s}
+.step i{width:22px;height:22px;border-radius:50%;flex:none;border:2px solid #c3cdf0;display:grid;place-items:center;transition:all .3s}
+.step i svg{width:12px;height:12px;opacity:0;transform:scale(0);transition:all .35s cubic-bezier(.3,1.8,.5,1)}
+.step.on{color:var(--ink)}
+.step.on i{border-color:var(--b);border-top-color:transparent;animation:spin .7s linear infinite}
+.step.ok{color:var(--ink)}
+.step.ok i{background:var(--ok);border-color:var(--ok);animation:none}
+.step.ok i svg{opacity:1;transform:scale(1)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.msg{min-height:20px;margin-top:10px;font-size:13px;font-weight:600;color:var(--ok);opacity:0;transition:opacity .4s}
+.msg.show{opacity:1}
+
+.confetti{position:fixed;top:-14px;width:9px;height:14px;z-index:9;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(108vh) rotate(720deg)}}
+
+/* ---------- contact icons ---------- */
+.contact{margin-top:22px;padding-top:18px;border-top:1px dashed rgba(31,81,255,.22);animation:fadeUp .7s 2.1s both}
+.contact h2{font-size:12.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.icons{display:flex;justify-content:center;gap:12px}
+.ic{
+  width:44px;height:44px;flex:none;border-radius:14px;display:grid;place-items:center;text-decoration:none;
+  background:#f4f8fb;border:1px solid rgba(31,81,255,.06);
+  box-shadow:0 10px 24px rgba(31,81,255,.12),0 2px 6px rgba(15,23,42,.05);
+  transition:transform .2s cubic-bezier(.3,1.6,.5,1),box-shadow .25s;
+  opacity:0;animation:icIn .6s cubic-bezier(.3,1.5,.5,1) forwards;
+}
+.ic:nth-child(1){animation-delay:2.25s}.ic:nth-child(2){animation-delay:2.35s}.ic:nth-child(3){animation-delay:2.45s}
+.ic:nth-child(4){animation-delay:2.55s}.ic:nth-child(5){animation-delay:2.65s}
+@keyframes icIn{from{opacity:0;transform:translateY(18px) scale(.7)}to{opacity:1;transform:none}}
+.ic svg{width:22px;height:22px;display:block}
+.ic:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(31,81,255,.22)}
+.ic:active{transform:scale(.92)}
+</style>
+</head>
+<body>
+<div class="bg a"></div><div class="bg b"></div><div class="bg c"></div>
+
+<main class="card">
+  <div class="badge">Get your EngliFy <span class="rk">🚀</span></div>
+
+  <div class="logo-box">
+    <div class="glow"></div>
+    <svg class="ring" viewBox="0 0 130 130"><circle cx="65" cy="65" r="54"/></svg>
+    <div class="burst"></div>
+    <img class="logo" id="logo" alt="EngliFy" src="https://drive.google.com/thumbnail?id=1TsT4CfgR_fd96O5D2aZ8OHrMnzWvtClN&sz=w512">
+    <div class="tick">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    </div>
+  </div>
+
+  <h1>EngliFy</h1>
+  <p class="sub">Get Ready To Use Your “EngliFy” 🏄</p>
+
+  <button class="btn" id="dl" type="button">
+    <span class="fill" id="fill"></span>
+    <span class="t" id="txt">Download [ EngliFy ]</span>
+  </button>
+
+  <div class="steps" id="steps">
+    <div class="step"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Checking your device</div>
+    <div class="step"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Connecting to server</div>
+    <div class="step"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Preparing EngliFy file</div>
+    <div class="step"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Almost ready</div>
+  </div>
+  <div class="msg" id="msg">Ready! Your download is starting…</div>
+
+  <div class="contact">
+    <h2>Contact us</h2>
+    <div class="icons">
+      <a class="ic" href="https://wa.me/qr/WAAXU235UOAFJ1" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#128C7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><g transform="translate(7.6 7.6) scale(.34)" stroke-width="5.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></g></svg>
+      </a>
+      <a class="ic" href="https://t.me/ifeelbetter999" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path fill="#229ED9" d="M21.9 3.4 2.6 10.8c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 5.8c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.7-.8L23.2 4.7c.3-1.2-.4-1.8-1.3-1.3z"/><path fill="#fff" opacity=".85" d="m9.2 13.6 8.4-5.2c.4-.2.7-.1.4.2l-6.8 6.1-.3 3.2z"/></svg>
+      </a>
+      <a class="ic" href="mailto:c.dot.c.concept.clear@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3.5"/><polyline points="21.5,6.5 12,13.5 2.5,6.5"/></svg>
+      </a>
+      <a class="ic" href="https://www.facebook.com/profile.php?id=61572357132834" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path fill="#1877F2" d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.9.3-1.6 1.7-1.6h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.5H7.5v3.3h2.8V22h3.2z"/></svg>
+      </a>
+      <a class="ic" href="https://youtube.com/@c_dot_c?si=LAVYShf041EeJlVE" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#FF0000"/><path fill="#fff" d="M10 8.9v6.2l5.3-3.1z"/></svg>
+      </a>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var FILE="https://drive.google.com/uc?export=download&id=1ykaXDRZIsR0lWqII5XfHr1DMmqs0KcgJ";
+  var btn=document.getElementById('dl'),fill=document.getElementById('fill'),txt=document.getElementById('txt'),
+      steps=document.getElementById('steps'),msg=document.getElementById('msg'),
+      els=steps.querySelectorAll('.step'),busy=false;
+
+  document.getElementById('logo').addEventListener('error',function(){
+    this.onerror=null;
+    this.src="https://drive.google.com/uc?export=view&id=1TsT4CfgR_fd96O5D2aZ8OHrMnzWvtClN";
+  });
+
+  function confetti(){
+    var c=['#1F51FF','#6d8dff','#a9bbff','#ffffff','#22c55e','#7dd3fc'];
+    for(var i=0;i<56;i++){
+      var e=document.createElement('div');e.className='confetti';
+      e.style.left=Math.random()*100+'vw';
+      e.style.background=c[i%c.length];
+      e.style.boxShadow='0 0 0 1px rgba(31,81,255,.15)';
+      e.style.borderRadius=Math.random()>.5?'50%':'2px';
+      e.style.animationDuration=(2+Math.random()*2)+'s';
+      e.style.animationDelay=(Math.random()*.4)+'s';
+      document.body.appendChild(e);
+      setTimeout(function(x){x.remove()},4800,e);
+    }
+  }
+
+  function startDownload(){
+    var a=document.createElement('a');
+    a.href=FILE;a.rel='noopener';
+    document.body.appendChild(a);a.click();a.remove();
+  }
+
+  function reset(){
+    btn.classList.remove('done');
+    fill.style.width='0';
+    txt.textContent='Download [ EngliFy ]';
+    steps.classList.remove('show');
+    msg.classList.remove('show');
+    els.forEach(function(s){s.classList.remove('on','ok')});
+    busy=false;
+  }
+
+  btn.addEventListener('click',function(e){
+    if(busy)return;busy=true;
+
+    var r=btn.getBoundingClientRect(),s=Math.max(r.width,r.height)/4;
+    var d=document.createElement('span');d.className='ripple';
+    d.style.width=d.style.height=s+'px';
+    d.style.left=(e.clientX-r.left-s/2)+'px';
+    d.style.top=(e.clientY-r.top-s/2)+'px';
+    btn.appendChild(d);setTimeout(function(){d.remove()},650);
+
+    btn.classList.add('loading');
+    steps.classList.add('show');
+    els.forEach(function(x){x.classList.remove('on','ok')});
+    els[0].classList.add('on');
+    txt.textContent='Preparing... 0%';
+
+    var p=0,stage=0;
+    var t=setInterval(function(){
+      p+=1.2+Math.random()*2.2;if(p>100)p=100;
+      fill.style.width=p+'%';
+      txt.textContent='Preparing... '+Math.floor(p)+'%';
+      var ns=Math.min(3,Math.floor(p/25));
+      while(stage<ns){els[stage].classList.remove('on');els[stage].classList.add('ok');stage++;els[stage].classList.add('on');}
+      if(p>=100){
+        clearInterval(t);
+        els[stage].classList.remove('on');els[stage].classList.add('ok');
+        setTimeout(function(){
+          btn.classList.remove('loading');btn.classList.add('done');
+          fill.style.width='0';
+          txt.textContent='100% ✓ Ready';
+          msg.classList.add('show');
+          confetti();
+          setTimeout(startDownload,700);
+          setTimeout(function(){txt.textContent='Download Again'; reset();},5000);
+        },350);
+      }
+    },70);
+  });
+})();
+</script>
+</body>
+</html>
